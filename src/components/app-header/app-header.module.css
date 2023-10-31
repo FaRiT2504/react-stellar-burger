@@ -1,0 +1,24 @@
+.header {
+  margin: 0 auto;
+  background-color: #1c1c21;
+  min-width: 1240px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 1240px;
+  margin: 0 auto;
+}
+
+.links {
+  display: flex;
+}
+
+.link {
+  display: flex;
+  text-decoration: none;
+  color: #fff;
+}

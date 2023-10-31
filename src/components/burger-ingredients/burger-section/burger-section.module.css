@@ -1,0 +1,13 @@
+.container {
+  padding-top: 40px;
+}
+
+.children {
+  padding: 24px 16px 0;
+  display: flex;
+  box-sizing: border-box;
+  width: 600px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px
+}

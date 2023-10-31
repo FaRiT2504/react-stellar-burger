@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 272px;
+  height: 208px;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.content {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  align-items: center;
+
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name {
+  min-height: 48px;
+  text-align: center;
+}

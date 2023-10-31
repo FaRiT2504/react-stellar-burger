@@ -5,3 +5,12 @@
   background-color: #131316;
   color: #f2f2f3;
 }
+
+.container {
+  margin: auto;
+  font-size: 1.5rem
+}
+
+.content {
+  display: flex;
+}
