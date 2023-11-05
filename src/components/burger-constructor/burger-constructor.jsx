@@ -4,15 +4,20 @@ import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components"
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-
-
-function BurgerConstructor({ data, orderOnClick }) {
-
-  const bun = data.find(
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ingredientsDataSelector,
+  ingredientsErrorSelector,
+  ingredientsIsLoadingSelector,
+} from "../../services/selectors/ingredients-selector";
+function BurgerConstructor({ /*data,*/ orderOnClick }) {
+  const dispatch = useDispatch();
+  const ingredients = useSelector(ingredientsDataSelector);
+  const bun = ingredients.find(
     item => item.type === "bun"
   )
 
-  const noBun = data.filter(
+  const noBun = ingredients.filter(
     item => item.type !== "bun"
   )
 

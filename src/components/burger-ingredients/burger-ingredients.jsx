@@ -4,8 +4,12 @@ import BurgerTab from './burger-tab/burger-tab';
 import styles from './burger-ingredients.module.css';
 import BurgerCard from './burger-card/burger-card';
 import BurgerSection from './burger-section/burger-section';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  ingredientsDataSelector
+} from "../../services/selectors/ingredients-selector";
 
-function BurgerIngredients({ data, cardOnClick, count }) {
+function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
 
   const [current, setCurrent] = React.useState("bun")
   const handleButtonClick = (currentTab) => {
@@ -15,6 +19,9 @@ function BurgerIngredients({ data, cardOnClick, count }) {
       element.scrollIntoView({ behavior: "smooth" })
     }
   }
+  const dispatch = useDispatch();
+
+  const ingredients = useSelector(ingredientsDataSelector);
 
   return (
 
@@ -24,7 +31,7 @@ function BurgerIngredients({ data, cardOnClick, count }) {
       <div className={`${styles.containerScroll} custom-scroll`}>
 
         <BurgerSection title={"Булки"} id={"bun"}>
-          {data.map(function (item) {
+          {ingredients.map(function (item) {
             if (item.type === "bun") {
               return (<BurgerCard key={item._id} onClick={cardOnClick(item)}
                 dataCard={item}
@@ -36,7 +43,7 @@ function BurgerIngredients({ data, cardOnClick, count }) {
         </BurgerSection>
 
         <BurgerSection title={"Соусы"} id={"sauce"}>
-          {data.map(function (item) {
+          {ingredients.map(function (item) {
             if (item.type === "sauce") {
               return (<BurgerCard key={item._id} onClick={cardOnClick(item)}
                 dataCard={item}
@@ -47,7 +54,7 @@ function BurgerIngredients({ data, cardOnClick, count }) {
         </BurgerSection>
 
         <BurgerSection title={"Начинки"} id={"main"}>
-          {data.map(function (item) {
+          {ingredients.map(function (item) {
             if (item.type === "main") {
               return (<BurgerCard key={item._id} onClick={cardOnClick(item)}
                 dataCard={item}
