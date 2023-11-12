@@ -11,7 +11,6 @@ import IngredientDetails from '../modal/ingredient-details/ingredient-details';
 import OrderDetails from '../modal/order-details/order-details';
 
 function App() {
-
   const [data, setData] = React.useState([]);
   const [hasError, setHasError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
