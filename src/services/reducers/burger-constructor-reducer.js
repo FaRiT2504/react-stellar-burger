@@ -1,8 +1,8 @@
 import {
-  SET_BUN,
-  SET_INGREDIENTS,
+  PUT_BUN,
+  PUT_INGREDIENTS,
   DELETE_INGREDIENT,
-  MOVE_INGREDIENT,
+  CLEAR_CONSTRUCTOR
 } from "../actions/burger-constructor-action";
 
 const initialState = {
@@ -12,39 +12,34 @@ const initialState = {
 
 export const burgerConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_BUN:
+    case PUT_BUN:
       return {
         ...state,
         bun: action.payload,
       };
 
-    case SET_INGREDIENTS:
+    case PUT_INGREDIENTS:
       return {
         ...state,
         ingredients: [...state.ingredients, action.payload],
       };
 
     case DELETE_INGREDIENT:
-      const index = state.ingredients.findIndex(
+      const ingredientId = state.ingredients.findIndex(
         (item) => item.ingredient._id === action.payload
       );
-      if (index !== -1) {
+      if (ingredientId >= 0) {
         const newIngredients = [...state.ingredients];
-        newIngredients.splice(index, 1);
+        newIngredients.splice(ingredientId, 1);
         return {
           ...state,
-          ingredients: state.ingredients.filter(
-            (item, index) => index !== action.payload
-          ),
+          ingredients: newIngredients,
         };
       }
       return state;
 
-    case MOVE_INGREDIENT:
-      return {
-        ...state,
-        ingredients: action.payload,
-      };
+    case CLEAR_CONSTRUCTOR:
+      return initialState;
 
     default:
       return state;

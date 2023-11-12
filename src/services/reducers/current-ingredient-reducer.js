@@ -7,7 +7,7 @@ export const currentIngredientReducer = (state = initialState, action) => {
     case SET_CURRENT_INGREDIENT: {
       return {
         ...state,
-        currentIngredient: action.payload.item,
+        currentIngredient: action.payload,
       };
     }
     case CLEAR_CURRENT_INGREDIENT: {

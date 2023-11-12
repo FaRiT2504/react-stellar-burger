@@ -8,10 +8,21 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   ingredientsDataSelector
 } from "../../services/selectors/ingredients-selector";
+import Modal from "../modal/modal";
+import IngredientDetails from '../modal/ingredient-details/ingredient-details';
+import {
+  isVisibleModalSelector
+} from "../../services/selectors/modal-selector";
+import { getIngredients } from "../../services/actions/ingredients-action";
+import { setCurrentItem, CLEAR_CURRENT_INGREDIENT } from "../../services/actions/current-ingredient-action";
 
-function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
-
+function BurgerIngredients({ count }) {
+  const dispatch = useDispatch();
+  const isVisibleModal = useSelector(
+    isVisibleModalSelector
+  );
   const [current, setCurrent] = React.useState("bun")
+  const [modal, setModal] = useState(false);
   const handleButtonClick = (currentTab) => {
     setCurrent(currentTab)
     const element = document.getElementById(currentTab);
@@ -19,9 +30,28 @@ function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
       element.scrollIntoView({ behavior: "smooth" })
     }
   }
-  const dispatch = useDispatch();
 
   const ingredients = useSelector(ingredientsDataSelector);
+  React.useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
+
+  const cardClick = React.useCallback(
+    (item) => {
+      return () => {
+        dispatch(setCurrentItem(item));
+        setModal(true);
+      };
+    },
+    []
+  );
+
+  const cardClose = () => {
+    setModal(false);
+    dispatch({
+      type: CLEAR_CURRENT_INGREDIENT,
+    });
+  };
 
   return (
 
@@ -33,7 +63,7 @@ function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
         <BurgerSection title={"Булки"} id={"bun"}>
           {ingredients.map(function (item) {
             if (item.type === "bun") {
-              return (<BurgerCard key={item._id} onClick={cardOnClick(item)}
+              return (<BurgerCard key={item._id} onClick={cardClick(item)}
                 dataCard={item}
                 count={count}
               />)
@@ -45,7 +75,7 @@ function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
         <BurgerSection title={"Соусы"} id={"sauce"}>
           {ingredients.map(function (item) {
             if (item.type === "sauce") {
-              return (<BurgerCard key={item._id} onClick={cardOnClick(item)}
+              return (<BurgerCard key={item._id} onClick={cardClick(item)}
                 dataCard={item}
                 count={count}
               />)
@@ -56,7 +86,7 @@ function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
         <BurgerSection title={"Начинки"} id={"main"}>
           {ingredients.map(function (item) {
             if (item.type === "main") {
-              return (<BurgerCard key={item._id} onClick={cardOnClick(item)}
+              return (<BurgerCard key={item._id} onClick={cardClick(item)}
                 dataCard={item}
                 count={count}
               />)
@@ -64,6 +94,17 @@ function BurgerIngredients({ /*data,*/ cardOnClick, count }) {
           })}
         </BurgerSection >
       </div>
+      {
+        modal &&
+        <Modal
+          title="Детали ингредиента"
+          isVisible={isVisibleModal}
+          onClose={cardClose}
+        >
+          <IngredientDetails />
+        </Modal>
+
+      }
     </div >
   );
 }
@@ -89,13 +130,5 @@ BurgerIngredients.propTypes = {
 
 export default BurgerIngredients;
 
-// const [isModalOpened, setIsModalOpened] = useState(false);
 
-// const handleOpenModal = () => {
-//   setIsModalOpened(true);
-// };
-
-// const handleCloseModal = () => {
-//   setIsModalOpened(false);
-// };
 

@@ -1,36 +1,30 @@
 import { v4 as uuid } from "uuid";
-export const SET_INGREDIENTS = "SET_INGREDIENTS";
-export const SET_BUN = "SET_BUN";
+export const PUT_INGREDIENTS = "SET_INGREDIENTS";
+export const PUT_BUN = "SET_BUN";
 export const CLEAR_CONSTRUCTOR = "CLEAR_CONSTRUCTOR";
 export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
-export const MOVE_INGREDIENT = "MOVE_INGREDIENT";
 
-export function deleteIngredient(itemId) {
-  return {
-    type: DELETE_INGREDIENT,
-    payload: itemId,
-  };
-}
+
+
 export function addBun(item) {
   return {
-    type: SET_BUN,
+    type: PUT_BUN,
     payload: item,
   };
 }
 
 export function addIngredients(item) {
   return {
-    type: SET_INGREDIENTS,
+    type: PUT_INGREDIENTS,
     payload: {
       ingredient: item,
       key: uuid(),
     },
   };
 }
-
-export function moveProduct(item) {
+export function deleteIngredient(id) {
   return {
-    type: MOVE_INGREDIENT,
-    payload: item,
+    type: DELETE_INGREDIENT,
+    payload: id,
   };
 }
