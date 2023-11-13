@@ -1,7 +1,12 @@
 import PropTypes from "prop-types";
 import styles from "./ingredient-details.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  currentIngredientSelector
+} from "../../../services/selectors/current-ingredient-selector";
 
-function IngredientDetails({ ingredient }) {
+function IngredientDetails() {
+  const ingredient = useSelector(currentIngredientSelector);
   return (
     <div className={`${styles.container} pb-10 pb-15`}>
       <img src={ingredient.image_large} alt={ingredient.name} />
