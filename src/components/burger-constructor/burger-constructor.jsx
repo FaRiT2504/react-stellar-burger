@@ -5,7 +5,6 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-
 function BurgerConstructor({ data, orderOnClick }) {
 
   const bun = data.find(
