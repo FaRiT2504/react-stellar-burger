@@ -14,12 +14,7 @@ export const getResponse = (endpoint, property) => {
     .then(checkResponse)
 }
 
-// export const getResponse = (endpoint, property) => {
-//   return fetch(URL + endpoint, property)
-//     .then((res) => res.ok
-//       ? res.json()
-//       : Promise.reject(`error: ${res.status} ${res.statusText}`))
-// }
+
 
 
 
