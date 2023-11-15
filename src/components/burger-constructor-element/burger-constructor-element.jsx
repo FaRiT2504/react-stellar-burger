@@ -8,17 +8,21 @@ import { useCallback, useRef } from "react";
 import {
   burgerIngredientsSelector
 } from "../../services/selectors/ingredients-selector";
-
+import PropTypes from 'prop-types';
 import {
-  deleteIngredient
+  deleteIngredient, moveIngredient
 } from "../../services/actions/burger-constructor-action";
-
+import { ingredientType } from "../../utils/types";
 
 
 function BurgerConstructorElement({ ingredient, index }) {
   const dispatch = useDispatch();
   const elementRef = useRef(null);
   const ingredients = useSelector(burgerIngredientsSelector);
+
+  const moveOrderIngredient = (dragIndex, hoverIndex, ingredients) => {
+    dispatch(moveIngredient(dragIndex, hoverIndex, ingredients));
+  };
 
   const [{ handlerId }, drop] = useDrop({
     accept: "orderIngredient",
@@ -50,7 +54,7 @@ function BurgerConstructorElement({ ingredient, index }) {
       if (dragIndex > hoverIndex && hoverClientY > hoverCenterY) {
         return;
       }
-
+      moveOrderIngredient(dragIndex, hoverIndex, ingredients);
       item.index = index;
     },
   });
@@ -78,4 +82,8 @@ function BurgerConstructorElement({ ingredient, index }) {
     </div>
   )
 }
+BurgerConstructorElement.propTypes = {
+  index: PropTypes.number,
+  ingredient: ingredientType,
+};
 export default BurgerConstructorElement;

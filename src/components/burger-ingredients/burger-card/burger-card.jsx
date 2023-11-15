@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
+import { ingredientType } from "../../../utils/types";
 
 function BurgerCard({ dataCard, onClick, count }) {
   const [, dragRef] = useDrag({
@@ -30,11 +31,9 @@ function BurgerCard({ dataCard, onClick, count }) {
 }
 
 BurgerCard.propTypes = {
-  img: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  count: PropTypes.number,
-  onClick: PropTypes.func.isRequired,
-  description: PropTypes.string.isRequired,
+  dataCard: ingredientType,
+  onClick: PropTypes.func,
+  count: PropTypes.number
 };
 
 export default BurgerCard
