@@ -16,15 +16,15 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <pre className={styles.container}>
+      <div className={styles.container}>
         <AppHeader />
-        <div className={styles.content}>
+        <main className={styles.content}>
           <DndProvider backend={HTML5Backend}>
             < BurgerIngredients count={1} />
             <BurgerConstructor />
           </DndProvider>
-        </div>
-      </pre>
+        </main>
+      </div>
     </div>
   );
 }

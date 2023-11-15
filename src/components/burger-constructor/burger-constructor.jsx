@@ -9,8 +9,7 @@ import {
   burgerIngredientsSelector
 } from "../../services/selectors/ingredients-selector";
 import { openModalAction } from "../../services/actions/modal-action";
-import { makeOrder } from "../../utils/api";
-import { orderSuccess, SET_NUMBER_ORDER_ERROR } from "../../services/actions/order-actions";
+import { makeOrder } from "../../services/actions/order-actions";
 import Modal from "../modal/modal";
 import {
   orderErrorSelector,
@@ -78,14 +77,8 @@ function BurgerConstructor() {
 
   const orderOnClick = () => {
     dispatch(openModalAction("order"));
-    const ingredtId = getIngredientsId(bun, noBun);
-    makeOrder(ingredtId)
-      .then((data) => dispatch(orderSuccess(data)))
-      .catch((err) => {
-        dispatch({ type: SET_NUMBER_ORDER_ERROR })
-        console.log(err)
-      }
-      );
+    const IngredientId = getIngredientsId(bun, noBun);
+    dispatch(makeOrder(IngredientId));
     setModalOpen(true);
   };
 
@@ -100,7 +93,7 @@ function BurgerConstructor() {
           {bun && (<ConstructorElement
             type="top"
             isLocked={true}
-            text={bun.name}
+            text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image_mobile}
           />)
@@ -125,7 +118,7 @@ function BurgerConstructor() {
           {bun && (<ConstructorElement
             type="bottom"
             isLocked={true}
-            text={bun.name}
+            text={`${bun.name} (низ)`}
             price={bun.price}
             thumbnail={bun.image_mobile}
           />)

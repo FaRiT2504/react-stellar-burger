@@ -2,7 +2,8 @@ import {
   PUT_BUN,
   PUT_INGREDIENTS,
   DELETE_INGREDIENT,
-  CLEAR_CONSTRUCTOR
+  CLEAR_CONSTRUCTOR,
+  MOVE_INGREDIENT,
 } from "../actions/burger-constructor-action";
 
 const initialState = {
@@ -23,6 +24,13 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         ...state,
         ingredients: [...state.ingredients, action.payload],
       };
+
+    case MOVE_INGREDIENT: {
+      return {
+        ...state,
+        ingredients: action.payload,
+      };
+    }
 
     case DELETE_INGREDIENT:
       const ingredientId = state.ingredients.findIndex(

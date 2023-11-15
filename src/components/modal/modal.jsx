@@ -51,6 +51,7 @@ function Modal({ children, title, isVisible, onClose }) {
 Modal.propTypes = {
   title: PropTypes.string,
   onClose: PropTypes.func,
+  isVisible: PropTypes.bool
 };
 
 export default Modal;

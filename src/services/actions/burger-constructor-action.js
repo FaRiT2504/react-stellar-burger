@@ -3,6 +3,7 @@ export const PUT_INGREDIENTS = "SET_INGREDIENTS";
 export const PUT_BUN = "SET_BUN";
 export const CLEAR_CONSTRUCTOR = "CLEAR_CONSTRUCTOR";
 export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
+export const MOVE_INGREDIENT = "MOVE_INGREDIENT";
 
 
 
@@ -28,3 +29,13 @@ export function deleteIngredient(id) {
     payload: id,
   };
 }
+export const moveIngredient = (dragIndex, hoverIndex, ingredients) => {
+  const dragIngredients = ingredients[dragIndex];
+  const sortIngredients = [...ingredients];
+  const [hoverItem] = sortIngredients.splice(hoverIndex, 1, dragIngredients);
+  sortIngredients.splice(dragIndex, 1, hoverItem);
+  return {
+    type: MOVE_INGREDIENT,
+    payload: sortIngredients,
+  };
+};
