@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 import ModalOverlay from "./modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function Modal({ children, onClose, title, isVisible }) {
+
+function Modal({ children, title, isVisible, onClose }) {
+
 
   React.useEffect(() => {
     function escapePress(event) {
@@ -13,14 +15,14 @@ function Modal({ children, onClose, title, isVisible }) {
         onClose();
       };
     };
-    if (isVisible) {
-      document.addEventListener("keydown", escapePress);
-    };
+
+    document.addEventListener("keydown", escapePress);
+
     return () => {
       document.removeEventListener("keydown", escapePress);
     };
   },
-    [isVisible]
+    [onClose]
   );
 
   const modalRoot = document.querySelector("#react-modals");
@@ -49,6 +51,7 @@ function Modal({ children, onClose, title, isVisible }) {
 Modal.propTypes = {
   title: PropTypes.string,
   onClose: PropTypes.func,
+  isVisible: PropTypes.bool
 };
 
 export default Modal;

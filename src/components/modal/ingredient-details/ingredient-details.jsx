@@ -1,7 +1,14 @@
 import PropTypes from "prop-types";
 import styles from "./ingredient-details.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  currentIngredientSelector
+} from "../../../services/selectors/current-ingredient-selector";
+import { ingredientType } from "../../../utils/types.js";
 
-function IngredientDetails({ ingredient }) {
+
+function IngredientDetails() {
+  const ingredient = useSelector(currentIngredientSelector);
   return (
     <div className={`${styles.container} pb-10 pb-15`}>
       <img src={ingredient.image_large} alt={ingredient.name} />
@@ -47,20 +54,7 @@ function IngredientDetails({ ingredient }) {
 };
 
 IngredientDetails.propTypes = {
-  ingredient: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(["bun", "main", "sauce"]).isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    calories: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    image_mobile: PropTypes.string.isRequired,
-    image_large: PropTypes.string.isRequired,
-    __v: PropTypes.number.isRequired,
-  })
+  ingredient: ingredientType
 }
 
 export default IngredientDetails;

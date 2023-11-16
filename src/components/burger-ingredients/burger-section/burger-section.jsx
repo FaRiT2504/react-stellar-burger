@@ -15,9 +15,9 @@ function BurgerSection({ title, children, id }) {
 }
 
 BurgerSection.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
-
+  title: PropTypes.string,
+  children: PropTypes.node,
+  id: PropTypes.string
 }
 
 export default BurgerSection
