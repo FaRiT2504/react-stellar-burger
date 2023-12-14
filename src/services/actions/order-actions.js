@@ -37,26 +37,3 @@ export const makeOrder = (ingredients) => {
 };
 
 
-// export const makeOrder = (ingredients) => {
-//   return fetch(`${URL}/orders`, {
-//     method: "POST",
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       ingredients: ingredients,
-//     }),
-//   }).then(checkResponse);
-// };
-
-// export function orderSuccess(data) {
-//   return {
-//     type: SET_NUMBER_ORDER_SUCCESS,
-//     payload: {
-//       number: data.order.number,
-//       name: data.name
-//     }
-//   };
-// }
-
-

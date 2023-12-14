@@ -1,11 +1,10 @@
 import React from 'react';
 import styles from './app-header.module.css'
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ListIcon, BurgerIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link } from "react-router-dom";
 
 function AppHeader() {
+
   return (
     <header className={styles.header}>
       <div className={styles.content}>
@@ -29,19 +28,23 @@ function AppHeader() {
             </span>
           </a>
         </nav>
+
         <div className={styles.logo}>
-          <a href=".">
+          <Link to="/" >
             <Logo />
-          </a>
+          </Link>
         </div>
+
         <a
           href="."
           className={`${styles.link} pt-4 pr-5 pb-4 pl-5 mt-4 mr-2 mb-4 `}
         >
           <ProfileIcon type="secondary" />
-          <span className="text text_type_main-default text_color_inactive ml-2">
-            Личный кабинет
-          </span>
+          <Link to="/profile" >
+            <span className="text text_type_main-default text_color_inactive ml-2">
+              Личный кабинет
+            </span>
+          </Link>
         </a>
       </div>
     </header>

@@ -30,3 +30,14 @@
   min-height: 48px;
   text-align: center;
 }
+
+.link {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+}

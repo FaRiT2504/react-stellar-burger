@@ -7,7 +7,7 @@ import {
 import { ingredientType } from "../../../utils/types.js";
 
 
-function IngredientDetails() {
+export default function IngredientDetails() {
   const ingredient = useSelector(currentIngredientSelector);
   return (
     <div className={`${styles.container} pb-10 pb-15`}>
@@ -57,4 +57,3 @@ IngredientDetails.propTypes = {
   ingredient: ingredientType
 }
 
-export default IngredientDetails;
