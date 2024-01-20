@@ -19,6 +19,9 @@ export const ForgotPasswordPage = () => {
         if (res.success === true) {
           navigate(`/reset-password`);
         }
+        else {
+          navigate(`/forgot-password`);
+        }
       });
   };
 

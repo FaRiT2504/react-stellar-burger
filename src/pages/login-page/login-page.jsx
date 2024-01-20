@@ -18,6 +18,7 @@ export const LoginPage = () => {
     dispatch(login(email, password));
 
   };
+
   if (isChecked === "true") {
     navigate("/");
   }
@@ -32,6 +33,7 @@ export const LoginPage = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
         <PasswordInput
+          placeholder="string"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

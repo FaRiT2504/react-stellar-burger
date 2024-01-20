@@ -1,4 +1,6 @@
 import { api } from "../../utils/api"
+import { getResponse } from "../../utils/api"
+
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 export const SET_USER = "SET_USER";
@@ -63,8 +65,12 @@ export const login = (email, password) => {
     });
     return api.login(email, password)
       .then((res) => {
-        localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('refreshToken', res.refreshToken);
+        // localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("accessToken", res.accessToken);
+        localStorage.setItem("refreshToken", res.refreshToken);
+        dispatch(setUser(res.user));
+        dispatch(setAuthChecked(true));
+
         dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: res.user
@@ -124,4 +130,47 @@ export const logout = () => {
       });
   }
 }
+
+
+
+
+
+
+export const getUserData = () => {
+  return function (dispatch) {
+    dispatch({
+      type: USER_UPDATE_REQUEST,
+    });
+
+    getResponse(`/auth/user`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+      },
+    })
+      .then((res) => {
+        dispatch({
+          type: USER_UPDATE_SUCCESS,
+          payload: res.user,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: USER_UPDATE_ERROR,
+          payload: error,
+        });
+      });
+  };
+};
+
+// getResponse(`/auth/register`, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+//   body: JSON.stringify({
+//     "name": name,
+//     "email": email,
+//     "password": password,
+//   }),
+// })
 

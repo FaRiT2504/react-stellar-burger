@@ -125,7 +125,7 @@ function BurgerIngredients() {
         </div>
 
       </div>
-      {
+      {/* {
         modal &&
         <Modal
           title="Детали ингредиента"
@@ -135,7 +135,7 @@ function BurgerIngredients() {
           <IngredientDetails />
         </Modal>
 
-      }
+      } */}
     </div >
   );
 }

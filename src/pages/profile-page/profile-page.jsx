@@ -1,20 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Input, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile-page.module.css";
 import { api } from "../../utils/api";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../services/actions/user-action"
-export const ProfilePage = () => {
-  const dispatch = useDispatch();
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+import { checkUserAuth, setUser, setAuthChecked } from "../../services/actions/user-action";
+import { login } from "../../services/actions/user-action"
 
+export const ProfilePage = () => {
+
+  const dispatch = useDispatch();
+  const [newName, setNewName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const name = useSelector(
+    (state) => state.userReducer.user.name
+  );
+  const email = useSelector(
+    (state) => state.userReducer.user.email
+  );
+  // const password = useSelector(
+  //   (state) => state.userReducer.userRegisterRequest
+  // );
   const onClick = (e) => {
     e.preventDefault();
     dispatch(logout());
   }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // dispatch(login(email, password));
+  };
+
+
+
+
+
+  // const isAuthChecked = useSelector((store) => store.userReducer.isAuthChecked);
+  // const user = useSelector(
+  //   (state) => state.userReducer.user
+  // );
+  // useEffect(() => {
+
+  //   dispatch(checkUserAuth());
+  //   dispatch(setUser(isAuthChecked));
+  //   dispatch(setAuthChecked(user));
+  // }, []);
+
+
+
+
+
 
   return (
     <div className={styles.container}>
@@ -42,30 +79,40 @@ export const ProfilePage = () => {
         </p>
       </div>
 
-      <form className={`${styles.form} mb-20`} >
+      <form className={`${styles.form} mb-20`} onSubmit={onSubmit} >
         <Input
           type="text"
           placeholder="Имя"
-          name="name"
+          name={"name"}
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setNewName(e.target.value)}
+        // name={1}
+
+        // onChange={1}
         />
         <EmailInput
           type="email"
           placeholder="E-mail"
-          name="email"
+          name={"email"}
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setNewEmail(e.target.value)}
+        // name={1}
+        // value={1}
+        // onChange={1}
         />
         <PasswordInput
-          placeholder="Пароль"
+          extraClass="mb-2"
+          placeholder="string"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        // name={1}
+        // value={1}
+        // onChange={1}
         />
       </form>
 
-    </div>
+    </div >
   );
 };
 

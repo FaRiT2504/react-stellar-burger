@@ -8,26 +8,26 @@ function AppHeader() {
   return (
     <header className={styles.header}>
       <div className={styles.content}>
-        <nav className={styles.links}>
-          <a
-            href="."
+        <div className={styles.links}>
+          <Link
+            to="/"
             className={`${styles.link} pt-4 pr-5 pb-4 pl-5 mt-4 mr-2 mb-4 `}
           >
             <BurgerIcon className="mr-2" type="primary" />
             <span className="text text_type_main-default ml-2">
               Конструктор
             </span>
-          </a>
-          <a
-            href="."
+          </Link>
+          <Link
+            to="/feed"
             className={`${styles.link} pt-4 pr-5 pb-4 pl-5 mt-4 mr-2 mb-4 `}
           >
             <ListIcon type="secondary" />
             <span className="text text_type_main-default text_color_inactive ml-2">
               Лента заказов
             </span>
-          </a>
-        </nav>
+          </Link>
+        </div>
 
         <div className={styles.logo}>
           <Link to="/" >
@@ -35,17 +35,14 @@ function AppHeader() {
           </Link>
         </div>
 
-        <a
-          href="."
+        <Link to="/profile"
           className={`${styles.link} pt-4 pr-5 pb-4 pl-5 mt-4 mr-2 mb-4 `}
         >
           <ProfileIcon type="secondary" />
-          <Link to="/profile" >
-            <span className="text text_type_main-default text_color_inactive ml-2">
-              Личный кабинет
-            </span>
-          </Link>
-        </a>
+          <span className="text text_type_main-default text_color_inactive ml-2">
+            Личный кабинет
+          </span>
+        </Link>
       </div>
     </header>
   );

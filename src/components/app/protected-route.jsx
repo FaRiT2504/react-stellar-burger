@@ -32,7 +32,9 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   return component;
 };
 
+
+
 export const OnlyAuth = Protected;
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth = (({ component }) => (
   <Protected onlyUnAuth={true} component={component} />
-);
+));

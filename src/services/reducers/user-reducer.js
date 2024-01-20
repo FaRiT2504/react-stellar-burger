@@ -31,18 +31,20 @@ const initialState = {
   userRegisterError: null,
 
 }
+
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTH_CHECKED: {
       return {
+        // ...state,
+        // isAuthChecked: true,
         ...state,
-        isAuthChecked: true,
+        isAuthChecked: action.payload
       };
     }
     case SET_USER: {
       return {
         ...state,
-        isAuthChecked: false,
         user: action.payload,
       };
     }
@@ -78,7 +80,7 @@ export const userReducer = (state = initialState, action) => {
     case USER_LOGOUT_REQUEST: {
       return {
         ...state,
-        isAuthChecked: true,
+        isAuthChecked: false,
         userLogoutRequest: true,
       };
     }
@@ -86,6 +88,7 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+        // isAuthChecked: false,
         userLogoutRequest: false
       };
     }

@@ -1,2 +1,2 @@
-export const currentIngredientSelector = (store) =>
-  store.currentIngredientReducer.currentIngredient;
+export const currentIngredientSelector = (state) =>
+  state.currentIngredientReducer.currentIngredient;

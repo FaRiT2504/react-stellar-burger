@@ -69,45 +69,53 @@ const login = (email, password) => {
   })
 }
 
-const logout = () => {
-  return getResponse(`/auth/login`, {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      "token": localStorage.getItem("refreshToken")
-    })
-  }).then((res) => {
-    return res
-  });
-}
-
-const getUser = () => fetchWithRefresh(`/auth/user`, {
-  method: 'GET',
+const logout = () => fetchWithRefresh(`${URL}/auth/logout`, {
+  method: 'POST',
   headers: {
     "Content-Type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("accessToken")
-  }
+  },
+  body: JSON.stringify({
+    "token": localStorage.getItem("refreshToken")
+  })
+}).then((res) => {
+  return res
 });
 
 
+const getUser = () => fetchWithRefresh(`${URL}/auth/user`, {
+  method: 'GET',
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: "Bearer" + localStorage.getItem("accessToken")
+  }
+});
 
-export const refreshToken = () => {
-  return getResponse(`/auth/token`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify({
-      token: localStorage.getItem("refreshToken"),
-    }),
-  })
-};
+// const getUser = () => fetchWithRefresh(`/auth/user`, {
+//   method: 'GET',
+//   headers: {
+//     "Content-Type": "application/json",
+//     Authorization: "Bearer " + sessionStorage.getItem("accessToken")
+//   }
+// });
+
+
+
+export const refreshToken = () => fetchWithRefresh(`${URL}/auth/token`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json;charset=utf-8",
+  },
+  body: JSON.stringify({
+    token: localStorage.getItem("refreshToken"),
+  }),
+})
+
 
 export const fetchWithRefresh = async (url, options) => {
   try {
-    return await getResponse(url, options);
+    // return getResponse(url, options);
+    const res = await fetch(url, options);
+    return await checkResponse(res);
   } catch (err) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
@@ -123,7 +131,24 @@ export const fetchWithRefresh = async (url, options) => {
     }
   }
 };
-
+// export const fetchWithRefresh = async (url, options) => {
+//   try {
+//     return getResponse(url, options);
+//   } catch (err) {
+//     if (err.message === "jwt expired") {
+//       const refreshData = await refreshToken(); //обновляем токен
+//       if (!refreshData.success) {
+//         return Promise.reject(refreshData);
+//       }
+//       localStorage.setItem("refreshToken", refreshData.refreshToken);
+//       localStorage.setItem("accessToken", refreshData.accessToken);
+//       options.headers.authorization = refreshData.accessToken;
+//       return await getResponse(url, options);//повторяем запрос
+//     } else {
+//       return Promise.reject(err);
+//     }
+//   }
+// };
 
 
 export const api = {

@@ -7,9 +7,9 @@ import styles from "./registration-page.module.css";
 import { registrationAction } from "../../services/actions/user-action";
 
 export const RegisterPage = () => {
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const request = useSelector(
@@ -49,6 +49,7 @@ export const RegisterPage = () => {
           disabled={request}
         />
         <PasswordInput
+          type="text"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

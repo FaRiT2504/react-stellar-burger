@@ -1,4 +1,5 @@
 import { getResponse } from "../../utils/api"
+import { api } from "../../utils/api"
 export const SET_NUMBER_ORDER_REQUEST = "SET_NUMBER_ORDER_REQUEST";
 export const SET_NUMBER_ORDER_SUCCESS = "SET_NUMBER_ORDER_SUCCESS";
 export const SET_NUMBER_ORDER_ERROR = "SET_NUMBER_ORDER_ERROR";

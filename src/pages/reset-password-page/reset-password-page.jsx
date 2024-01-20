@@ -11,8 +11,8 @@ import styles from "./reset-password-page.module.css";
 
 export const ResetPasswordPage = () => {
   const navigate = useNavigate();
-  const [token, setToken] = useState(null);
-  const [NewPassword, setNewPassword] = useState(null);
+  const [token, setToken] = useState("");
+  const [NewPassword, setNewPassword] = useState("");
   const request = useSelector(
     (state) => state.userReducer.userRegisterRequest
   );
@@ -25,7 +25,9 @@ export const ResetPasswordPage = () => {
         }
       })
   }
-
+  if (!request) {
+    navigate("/forgot-password");
+  }
   return (
     <>
       <h2 className={`${styles.heading}  text text_type_main-medium mb-6`}>
