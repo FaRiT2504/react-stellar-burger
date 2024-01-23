@@ -1,22 +1,20 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login-page.module.css";
 import { login } from "../../services/actions/user-action"
+import { useForm } from "../../utils/hooks/useForm";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { value, onChange } = useForm({ email: "", password: "" });
   const navigate = useNavigate();
   const isChecked = useSelector(
     (state) => state.userReducer.isAuthChecked
   );
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
-
+    dispatch(login(value.email, value.password));
   };
 
   if (isChecked === "true") {
@@ -29,20 +27,20 @@ export const LoginPage = () => {
         <EmailInput
           type="email"
           name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={value.email}
+          onChange={onChange}
         />
         <PasswordInput
           placeholder="string"
           name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={value.password}
+          onChange={onChange}
         />
         <Button
           size="medium"
           type="primary"
           htmlType="submit"
-          disabled={!email || !password}
+          disabled={!value.email || !value.password}
           children="Войти"
         />
       </form>

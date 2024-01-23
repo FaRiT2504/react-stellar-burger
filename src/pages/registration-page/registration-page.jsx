@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Input, EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration-page.module.css";
 import { registrationAction } from "../../services/actions/user-action";
+import { useForm } from "../../utils/hooks/useForm";
+
 
 export const RegisterPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { value, onChange } = useForm({ name: "", email: "", password: "" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const request = useSelector(
@@ -21,7 +20,7 @@ export const RegisterPage = () => {
 
   function onSubmit(e) {
     e.preventDefault();
-    dispatch(registrationAction(name, email, password));
+    dispatch(registrationAction(value.name, value.email, value.password));
     if (isChecked === "true") {
       navigate("/login");
     }
@@ -37,22 +36,22 @@ export const RegisterPage = () => {
           type="text"
           placeholder="Имя"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={value.name}
+          onChange={onChange}
           disabled={request}
         />
         <EmailInput
           type="email"
           name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={value.email}
+          onChange={onChange}
           disabled={request}
         />
         <PasswordInput
           type="text"
           name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={value.password}
+          onChange={onChange}
           disabled={request}
         />
         <Button

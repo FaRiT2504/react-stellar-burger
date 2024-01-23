@@ -36,8 +36,6 @@ export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_AUTH_CHECKED: {
       return {
-        // ...state,
-        // isAuthChecked: true,
         ...state,
         isAuthChecked: action.payload
       };

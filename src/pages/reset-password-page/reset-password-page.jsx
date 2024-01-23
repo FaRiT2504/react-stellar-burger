@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { api } from "../../utils/api";
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,17 +7,17 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./reset-password-page.module.css";
+import { useForm } from "../../utils/hooks/useForm";
 
 export const ResetPasswordPage = () => {
   const navigate = useNavigate();
-  const [token, setToken] = useState("");
-  const [NewPassword, setNewPassword] = useState("");
+  const { value, onChange } = useForm({ password: '', token: '' });
   const request = useSelector(
     (state) => state.userReducer.userRegisterRequest
   );
   const onSubmit = (e) => {
     e.preventDefault();
-    api.resetPassword(NewPassword, token)
+    api.resetPassword(value.password, value.token)
       .then((res) => {
         if (res.success === true) {
           navigate("/");
@@ -36,15 +35,15 @@ export const ResetPasswordPage = () => {
       <form className={`${styles.form} mb-20`} onSubmit={onSubmit} >
         <PasswordInput
           name="password"
-          value={NewPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
+          value={value.password}
+          onChange={onChange}
           placeholder="Введите новый пароль"
           disabled={request}
         />
         <Input
           name="token"
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
+          value={value.token}
+          onChange={onChange}
           placeholder="Введите код из письма"
           disabled={request}
         />

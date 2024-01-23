@@ -90,16 +90,6 @@ const getUser = () => fetchWithRefresh(`${URL}/auth/user`, {
   }
 });
 
-// const getUser = () => fetchWithRefresh(`/auth/user`, {
-//   method: 'GET',
-//   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: "Bearer " + sessionStorage.getItem("accessToken")
-//   }
-// });
-
-
-
 export const refreshToken = () => fetchWithRefresh(`${URL}/auth/token`, {
   method: "POST",
   headers: {
@@ -131,24 +121,18 @@ export const fetchWithRefresh = async (url, options) => {
     }
   }
 };
-// export const fetchWithRefresh = async (url, options) => {
-//   try {
-//     return getResponse(url, options);
-//   } catch (err) {
-//     if (err.message === "jwt expired") {
-//       const refreshData = await refreshToken(); //обновляем токен
-//       if (!refreshData.success) {
-//         return Promise.reject(refreshData);
-//       }
-//       localStorage.setItem("refreshToken", refreshData.refreshToken);
-//       localStorage.setItem("accessToken", refreshData.accessToken);
-//       options.headers.authorization = refreshData.accessToken;
-//       return await getResponse(url, options);//повторяем запрос
-//     } else {
-//       return Promise.reject(err);
-//     }
-//   }
-// };
+
+const userRefresh = (name, email) => fetchWithRefresh(`${URL}/auth/user`, {
+  method: 'PATCH',
+  headers: {
+    "Content-Type": "application/json;charset=utf-8",
+    Authorization: localStorage.getItem("accessToken")
+  },
+  body: JSON.stringify({
+    "name": name,
+    "email": email,
+  })
+});
 
 
 export const api = {
@@ -160,7 +144,8 @@ export const api = {
   resetPassword,
   fetchWithRefresh,
   refreshToken,
-  checkEmail
+  checkEmail,
+  userRefresh
 };
 
 

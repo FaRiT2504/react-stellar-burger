@@ -1,42 +1,15 @@
-import PropTypes from "prop-types";
-import React, { useState, useEffect, useCallback } from "react";
-
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  currentIngredientSelector
-} from "../../../services/selectors/current-ingredient-selector";
 import { ingredientType } from "../../../utils/types";
-
-
 import { ingredientsDataSelector } from "../../../services/selectors/ingredients-selector";
-
-import { SET_CURRENT_INGREDIENT } from "../../../services/actions/current-ingredient-action";
-import { getIngredients } from "../../../services/actions/ingredients-action";
 import styles from "./ingredient-details.module.css";
 
-
 export function IngredientDetails() {
-  // const dispatch = useDispatch();
-
-
-
   const ingredients = useSelector(ingredientsDataSelector);
   const { ingredientId } = useParams();
   const ingredient = ingredients.find(function (data) {
     return data._id === ingredientId
   });
-
-  // const ingredient = useSelector(currentIngredientSelector);
-
-  // useEffect(() => {
-  //   // dispatch(getIngredients());
-  //   dispatch({
-  //     type: SET_CURRENT_INGREDIENT,
-  //     payload: ingredients.find((ingredient) => ingredient._id === _id),
-  //   });
-  // }, [dispatch, ingredients, ingredient, _id]);
-  // const ingredient = useSelector(currentIngredientSelector);
 
   return (
     <div className={`${styles.container} pb-10 pb-15`}>

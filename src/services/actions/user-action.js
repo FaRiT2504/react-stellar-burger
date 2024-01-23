@@ -22,8 +22,6 @@ export const USER_LOGOUT_REQUEST = "USER_LOGOUT_REQUEST";
 export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
 export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR";
 
-
-
 export const setAuthChecked = (value) => ({
   type: SET_AUTH_CHECKED,
   payload: value,
@@ -65,7 +63,6 @@ export const login = (email, password) => {
     });
     return api.login(email, password)
       .then((res) => {
-        // localStorage.setItem("accessToken", res.accessToken);
         localStorage.setItem("accessToken", res.accessToken);
         localStorage.setItem("refreshToken", res.refreshToken);
         dispatch(setUser(res.user));
@@ -131,11 +128,6 @@ export const logout = () => {
   }
 }
 
-
-
-
-
-
 export const getUserData = () => {
   return function (dispatch) {
     dispatch({
@@ -162,15 +154,4 @@ export const getUserData = () => {
   };
 };
 
-// getResponse(`/auth/register`, {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-//   body: JSON.stringify({
-//     "name": name,
-//     "email": email,
-//     "password": password,
-//   }),
-// })
 
