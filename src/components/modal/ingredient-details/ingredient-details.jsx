@@ -1,14 +1,16 @@
-import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { ingredientType } from "../../../utils/types";
+import { ingredientsDataSelector } from "../../../services/selectors/ingredients-selector";
 import styles from "./ingredient-details.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  currentIngredientSelector
-} from "../../../services/selectors/current-ingredient-selector";
-import { ingredientType } from "../../../utils/types.js";
 
+export function IngredientDetails() {
+  const ingredients = useSelector(ingredientsDataSelector);
+  const { ingredientId } = useParams();
+  const ingredient = ingredients.find(function (data) {
+    return data._id === ingredientId
+  });
 
-function IngredientDetails() {
-  const ingredient = useSelector(currentIngredientSelector);
   return (
     <div className={`${styles.container} pb-10 pb-15`}>
       <img src={ingredient.image_large} alt={ingredient.name} />
@@ -56,5 +58,5 @@ function IngredientDetails() {
 IngredientDetails.propTypes = {
   ingredient: ingredientType
 }
-
 export default IngredientDetails;
+

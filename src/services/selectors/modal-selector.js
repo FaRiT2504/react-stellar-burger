@@ -1,6 +1,6 @@
-export const modalOpenSelector = (store) =>
-  store.modalReducer.modal;
-export const isVisibleModalSelector = (store) =>
-  store.modalReducer.isVisibleModal;
-export const closeModalSelector = (store) =>
-  store.modalReducer.isVisibleModal = false;
+export const modalOpenSelector = (state) =>
+  state.modalReducer.modal;
+export const isVisibleModalSelector = (state) =>
+  state.modalReducer.isVisibleModal;
+export const closeModalSelector = (state) =>
+  state.modalReducer.isVisibleModal = false;

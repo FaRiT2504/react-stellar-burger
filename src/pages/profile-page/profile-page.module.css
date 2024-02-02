@@ -1,0 +1,31 @@
+.description {
+  color: #8585AD;
+  padding-top: 80px;
+  max-width: 320px;
+  opacity: .4;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  min-width: 320px
+}
+
+.linkActive {
+  cursor: pointer;
+  text-decoration: none;
+  color: #F2F2F3
+}
+
+.linkInactive {
+  cursor: pointer;
+  text-decoration: none;
+  color: #8585AD
+}
+
+.container {
+  display: flex;
+  gap: 65px;
+  padding-top: 115px;
+}

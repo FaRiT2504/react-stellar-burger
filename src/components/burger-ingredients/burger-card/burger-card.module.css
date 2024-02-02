@@ -1,23 +1,22 @@
 .container {
   display: flex;
   flex-direction: column;
-  max-width: 272px;
-  height: 208px;
-  box-sizing: border-box;
-  position: relative;
-  cursor: pointer;
+  max-width: 270px;
+  height: 200px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
 }
 
 .content {
   margin: 0;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
   align-items: center;
-
+  cursor: pointer;
 }
 
 .price {
@@ -27,6 +26,18 @@
 }
 
 .name {
-  min-height: 48px;
+  min-height: 50px;
   text-align: center;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  align-items: center;
+
 }

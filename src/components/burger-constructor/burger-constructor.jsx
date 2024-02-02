@@ -22,6 +22,8 @@ import { CLEAR_CONSTRUCTOR, addIngredients, addBun } from "../../services/action
 import { useDrop } from "react-dnd";
 import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -32,7 +34,8 @@ function BurgerConstructor() {
   const orderName = useSelector(orderNameSelector);
   const orderNumber = useSelector(orderNumberSelector);
   const [modalOpen, setModalOpen] = useState(false);
-
+  const user = useSelector(store => store.userReducer.user);
+  const navigate = useNavigate();
   React.useEffect(() => {
     if (orderName && orderNumber) {
       dispatch({
@@ -138,7 +141,12 @@ function BurgerConstructor() {
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={orderOnClick}
+          onClick={
+            () => {
+              if (user) { orderOnClick() }
+              else { navigate(`/login`); }
+            }
+          }
         >
           {orderIsLoading ? "Оформление..." : "Оформить заказ"}
         </Button>
