@@ -6,7 +6,7 @@ import { getIngredients } from "../../services/actions/ingredients-action";
 import { useDispatch, useSelector } from "react-redux";
 import { ProfilePage } from "../../pages/profile-page/profile-page";
 import { RegisterPage } from "../../pages/registration-page/registration-page";
-import { ForgotPasswordPage } from "../../pages/forgot-password-page/forgotPasswordPage";
+import { ForgotPasswordPage } from "../../pages/forgot-password-page/forgot-password-page";
 import { ResetPasswordPage } from "../../pages/reset-password-page/reset-password-page";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { LoginPage } from "../../pages/login-page/login-page";
