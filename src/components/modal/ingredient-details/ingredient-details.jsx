@@ -1,11 +1,21 @@
 import { useSelector } from "react-redux";
+// import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ingredientType } from "../../../utils/types";
 import { ingredientsDataSelector } from "../../../services/selectors/ingredients-selector";
 import styles from "./ingredient-details.module.css";
+// import { getIngredients } from "../../../services/actions/ingredients-action";
+// import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/ws-action'
 
 export function IngredientDetails() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getIngredients());
+  // }, [])
+  // const isLoading = useSelector(ingredientsIsLoadingSelector)
   const ingredients = useSelector(ingredientsDataSelector);
+  // const ingredients = useSelector((state) => state.ingredientsReducer.ingredients);
   const { ingredientId } = useParams();
   const ingredient = ingredients.find(function (data) {
     return data._id === ingredientId
@@ -52,6 +62,7 @@ export function IngredientDetails() {
         </div>
       </div>
     </div>
+
   );
 };
 

@@ -1,8 +1,10 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { useEffect } from 'react'
 import styles from "./profile-page.module.css";
-import { useDispatch } from "react-redux";
-import { logout } from "../../services/actions/user-action"
 
+import { logout } from "../../services/actions/user-action"
+import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/ws-action'
+import { useDispatch, useSelector } from 'react-redux'
 export const ProfilePage = () => {
   const dispatch = useDispatch();
   const onClick = (e) => {
@@ -10,7 +12,20 @@ export const ProfilePage = () => {
     dispatch(logout());
   }
 
-  return (
+  const url = 'wss://norma.nomoreparties.space/orders/all'
+
+  useEffect(() => {
+    dispatch(wsConnectionStart(url))
+
+    return () => {
+      dispatch(wsConnectionClosed())
+    }
+  }, [])
+  const ordersInfo = useSelector(state => state.wsReducer.ordersInfo)
+  const wsConnected = useSelector(state => state.wsReducer.wsConnected)
+
+
+  return (wsConnected && ordersInfo &&
     <div className={styles.container}>
       <div className={styles.links}>
         <NavLink

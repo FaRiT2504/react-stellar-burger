@@ -5,6 +5,9 @@ import { currentIngredientReducer } from "./current-ingredient-reducer";
 import { burgerConstructorReducer } from "./burger-constructor-reducer";
 import { modalReducer } from "./modal-reducer";
 import { userReducer } from "./user-reducer";
+import { wsReducer } from "./ws-reducer";
+import { orderNumberReducer } from "./order-number";
+
 
 export const rootReducer = combineReducers({
   ingredientsReducer,
@@ -12,5 +15,7 @@ export const rootReducer = combineReducers({
   currentIngredientReducer,
   burgerConstructorReducer,
   modalReducer,
-  userReducer
+  userReducer,
+  wsReducer,
+  orderNumberReducer
 })

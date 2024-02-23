@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  margin-bottom: 20px;
+}
+
+.number {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.button {
+  padding: 0;
+  height: 24px;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 70px;
+  width: 640px;
+  gap: 8px;
+}
+
+.done {
+  color: #0CC;
+}
+
+.order {
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredients {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 304px;
+  overflow-y: scroll;
+  padding-right: 24px;
+}
+
+.ingredient {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 100px;
+  border: 2px solid var(--button-normal, #801AB2);
+  background: var(--interface-bg, #131316);
+}
+
+.name {
+  min-width: 320px;
+}
+
+.price {
+  min-width: 192px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  min-width: 640px;
+
+}
