@@ -22,20 +22,19 @@ export default function ProfileCard({ order, ingredients }) {
   const number = order.number
 
   return (
-    <li className={styles.container}>
+    <>
       <Link
         to={`/profile/orders/${number}`}
-
         state={{ background: location }}
-        className={styles.link}>
+        className={`pl-6 pr-6 pb-6 pt-6 ${styles.link}`}>
 
-        <div className={styles.details}>
-          <p className={styles.number}>{`#${order.number}`}</p>
-          <p className={styles.date}>
+        <div className={styles.heading}>
+          <p className='text text_type_digits-default'>{`#${order.number}`}</p>
+          <p className='text text_type_main-default text_color_inactive'>
             <FormattedDate date={new Date(order.createdAt)} />
           </p>
         </div>
-        <h2 className={styles.name}>{order.name}</h2>
+        <h2 className={`text text_type_main-medium ${styles.title}`}>{order.name}</h2>
         <div className={styles.details}>
           <div className={styles.photos}>
             {orderIngredients.map((ingredient, index) => {
@@ -50,11 +49,11 @@ export default function ProfileCard({ order, ingredients }) {
               }
             })}
           </div>
-          <p className={styles.price}>
+          <p className={`text text_type_digits-default ${styles.price}`}>
             {totalPrice} <CurrencyIcon type="primary" />
           </p>
         </div>
       </Link>
-    </li>
+    </>
   )
 }

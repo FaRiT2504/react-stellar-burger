@@ -8,16 +8,15 @@ import {
   WS_CONNECTION_ERROR,
   WS_GET_ORDERS,
   WS_CONNECTION_CLOSED,
-  WS_CONNECTION_DISCONNECT
+
 } from './actions/ws-action';
 
 
 
 const wsActions = {
   wsInit: WS_CONNECTION_START,
-  wsClose: WS_CONNECTION_DISCONNECT,
+  wsClose: WS_CONNECTION_CLOSED,
   onOpen: WS_CONNECTION_SUCCESS,
-  onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
   onOrders: WS_GET_ORDERS,
 };

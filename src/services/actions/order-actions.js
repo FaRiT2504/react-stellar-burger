@@ -14,6 +14,7 @@ export const makeOrder = (ingredients) => {
       method: "POST",
       headers: {
         "Content-type": "application/json",
+        Authorization: localStorage.getItem('accessToken')
       },
       body: JSON.stringify({
         ingredients: ingredients,

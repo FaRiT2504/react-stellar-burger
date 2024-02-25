@@ -36,7 +36,6 @@ export default function FeedCard({ order, ingredients }) {
         </div>
         <h2 className={`text text_type_main-medium ${styles.title}`}>{order.name}</h2>
         <div className={styles.details}>
-
           <div className={styles.photos}>
             {orderIngredients.map((ingredient, index) => {
               if (index < 6) {

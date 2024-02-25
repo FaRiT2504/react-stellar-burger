@@ -12,20 +12,20 @@ export const ProfilePage = () => {
     dispatch(logout());
   }
 
-  const url = 'wss://norma.nomoreparties.space/orders/all'
+  // const url = 'wss://norma.nomoreparties.space/orders/all'
 
-  useEffect(() => {
-    dispatch(wsConnectionStart(url))
+  // useEffect(() => {
+  //   dispatch(wsConnectionStart(url))
 
-    return () => {
-      dispatch(wsConnectionClosed())
-    }
-  }, [])
-  const ordersInfo = useSelector(state => state.wsReducer.ordersInfo)
-  const wsConnected = useSelector(state => state.wsReducer.wsConnected)
+  //   return () => {
+  //     dispatch(wsConnectionClosed())
+  //   }
+  // }, [])
+  // const ordersInfo = useSelector(state => state.wsReducer.ordersInfo)
+  // const wsConnected = useSelector(state => state.wsReducer.wsConnected)
 
 
-  return (wsConnected && ordersInfo &&
+  return (
     <div className={styles.container}>
       <div className={styles.links}>
         <NavLink
