@@ -8,20 +8,15 @@ export default function FeedList() {
 
   const ingredients = useSelector(ingredientsDataSelector);
   return (ordersInfo &&
-    <section className={`${styles.container} custom-scroll`}>
+    <div className={`${styles.container} custom-scroll`}>
       <ul className={styles.list}>
         <li>
           {ordersInfo.orders.map((order) => (
-
             <FeedCard key={order.number} order={order} ingredients={ingredients} />
-
-          )
-          )
-
-          }
+            ))}
         </li>
       </ul>
-    </section>
+    </div>
   )
 }
 
