@@ -1,5 +1,5 @@
 import { URL } from "./constants"
-
+let accessToken = localStorage.getItem("accessToken")
 export const checkResponse = (res) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 }
@@ -8,6 +8,29 @@ export const getResponse = (endpoint, property) => {
   return fetch(URL + endpoint, property)
     .then(checkResponse)
 }
+
+export const getOrderFeedRequest = (number) => {
+  return getResponse(`/orders/${number}`, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json',
+      // Authorization: "Bearer" + localStorage.getItem("accessToken")
+    },
+  })
+}
+
+export const getOrderProfileRequest = (number) => {
+  return getResponse(`/orders/${number}?token=${localStorage.getItem("accessToken")}`, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json',
+      // Authorization: "Bearer" + localStorage.getItem("accessToken")
+    },
+  })
+}
+
 
 const registration = (name, email, password) => {
   return getResponse(`/auth/register`, {
@@ -145,7 +168,8 @@ export const api = {
   fetchWithRefresh,
   refreshToken,
   checkEmail,
-  userRefresh
+  userRefresh,
+  getOrderFeedRequest
 };
 
 

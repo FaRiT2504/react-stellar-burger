@@ -12,3 +12,5 @@ export const bunSelector = (state) => state.burgerConstructorReducer.bun;
 
 export const burgerIngredientsSelector = (state) =>
   state.burgerConstructorReducer.ingredients;
+
+export const orderSelector = (store) => store.wsReducer.ordersInfo;
