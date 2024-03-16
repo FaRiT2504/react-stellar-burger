@@ -26,7 +26,7 @@ import BurgerConstructorElement from "../burger-constructor-element/burger-const
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { TIngredient } from "../../services/types/data";
-
+import { IBurgerConstructorIngredient } from "../../services/reducers/burger-constructor-reducer"
 
 const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const BurgerConstructor: FC = () => {
       let total = bun ? bun.price * 2 : 0;
 
       return noBun?.reduce(
-        (previousValue: number, item: TIngredient) => previousValue + item.price, total
+        (previousValue: number, item: IBurgerConstructorIngredient) => previousValue + item.ingredient.price, total
       );
     },
     [bun, noBun]
@@ -68,12 +68,12 @@ const BurgerConstructor: FC = () => {
     drop(ingredient: TIngredient) {
       ingredient.type === "bun"
         ? dispatch(addBunAction(ingredient))
-        : dispatch(addIngredientsAction(ingredient, uuid()));
+        : dispatch(addIngredientsAction(ingredient));
     },
   });
 
-  const getIngredientsId = (bun: TIngredient | null, noBun: TIngredient[] | null) => {
-    const noBunId = noBun?.map((item) => item._id) as string[];
+  const getIngredientsId = (bun: TIngredient | null, noBun: IBurgerConstructorIngredient[] | null) => {
+    const noBunId = noBun?.map((item) => item.ingredient._id) as string[];
     const bunId = bun?._id;
     return [bunId, ...noBunId, bunId];
   };
@@ -106,7 +106,7 @@ const BurgerConstructor: FC = () => {
 
         <div className={`${styles.scroll} custom-scroll pr-2`}>
           {
-            noBun?.map((item: TIngredient, index: number) => {
+            noBun?.map((item: IBurgerConstructorIngredient, index: number) => {
               return (<BurgerConstructorElement
                 key={item.key}
                 index={index}

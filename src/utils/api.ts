@@ -18,7 +18,7 @@ export const getIngredientsRequest = () => {
     method: 'GET',
     cache: 'no-cache',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       // Authorization: "Bearer" + localStorage.getItem("accessToken")
     },
   })
@@ -30,7 +30,7 @@ export const getOrderFeedRequest = (number: string | number) => {
     method: 'GET',
     cache: 'no-cache',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       // Authorization: "Bearer" + localStorage.getItem("accessToken")
     },
   })
@@ -41,7 +41,7 @@ export const getOrderProfileRequest = (number: string) => {
     method: 'GET',
     cache: 'no-cache',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       // Authorization: "Bearer" + localStorage.getItem("accessToken")
     },
   })
@@ -52,7 +52,7 @@ const registration = (name: string, email: string, password: string) => {
   return getResponse(`/auth/register`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
       "name": name,
@@ -67,7 +67,7 @@ const checkEmail = (email: string) => {
   return getResponse(`/password-reset`, {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
+      "Content-type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
       "email": email,
@@ -83,7 +83,7 @@ export const resetPassword = (newPassword: string, token: string) => {
   return getResponse(`/password-reset/reset`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
       "password": newPassword,
@@ -95,11 +95,24 @@ export const resetPassword = (newPassword: string, token: string) => {
   });
 };
 
+// const login = (email: string, password: string) => {
+//   return getResponse(`/auth/login`, {
+//     method: 'POST',
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       "email": email,
+//       "password": password
+//     })
+//   })
+// }
+
 const login = (email: string, password: string) => {
-  return getResponse(`/auth/login`, {
+  return fetchWithRefresh(`${URL}/auth/login`, {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
       "email": email,
@@ -108,10 +121,11 @@ const login = (email: string, password: string) => {
   })
 }
 
+
 const logout = () => fetchWithRefresh(`${URL}/auth/logout`, {
   method: 'POST',
   headers: {
-    "Content-Type": "application/json",
+    "Content-Type": "application/json;charset=utf-8",
   },
   body: JSON.stringify({
     "token": localStorage.getItem("refreshToken") as string

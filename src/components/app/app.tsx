@@ -19,7 +19,7 @@ import { OnlyAuth, OnlyUnAuth } from "./protected-route";
 import { MainPage } from "../../pages/main-page/main-page";
 import { checkUserAuth } from "../../services/actions/user-action";
 import IngredientDetails from "../modal/ingredient-details/ingredient-details";
-import { ingredientsDataSelector, ingredientsIsLoadingSelector } from "../../services/selectors/ingredients-selector";
+// import { ingredientsDataSelector, ingredientsIsLoadingSelector } from "../../services/selectors/ingredients-selector";
 import Profile from "../profile/profile";
 // import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/ws-action'
 // import StatusBoard from "../status-board/status-board"
@@ -27,7 +27,7 @@ import Profile from "../profile/profile";
 import ProfileList from "../profile-list/profile-list";
 // import { getOrder } from "../../pages/feed-page/feed-page";
 
-const App = () => {
+const App: FC = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -48,8 +48,8 @@ const App = () => {
   // const lenght: number | undefined | null = ingredients.length
 
   return (
-    (!isLoading && ingredients?.length > 0 &&
-      < div className={styles.app} >
+    (!isLoading && ingredients!!.length > 0 ?
+      (< div className={styles.app} >
         <div className={styles.container}>
           <AppHeader />
           <Routes location={background || location}>
@@ -109,9 +109,10 @@ const App = () => {
             </Routes>
           )}
         </div>
-      </div >
+      </div >) : null
     )
   )
+
 }
 
 export default App;

@@ -67,10 +67,9 @@ const Order: FC = () => {
     (ingredients
       && ordersInfo
       && order
-      && orderIngredients
-      &&
+      && orderIngredients ?
 
-      <>
+      (<>
         < div className={`pl-10 pr-10 pb-10 pt-10 ${styles.container}`
         }>
           <div className={styles.header}>
@@ -111,7 +110,7 @@ const Order: FC = () => {
             </p>
           </div>
         </div >
-      </>
+      </>) : null
     ))
 }
 

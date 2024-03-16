@@ -5,6 +5,7 @@ export type TIngredient = {
   readonly type: string;
   readonly proteins: number;
   readonly fat: number;
+  readonly ingredient?: TIngredient;
   readonly carbohydrates: number;
   readonly calories: number;
   readonly price: number;
@@ -14,6 +15,7 @@ export type TIngredient = {
   readonly __v: number;
   readonly uuid?: string | null
   readonly key?: string | null
+  readonly action?: TIngredient | null
 }
 
 export type TOrder = {

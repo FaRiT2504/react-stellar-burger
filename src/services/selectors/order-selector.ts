@@ -1,4 +1,6 @@
-// export const orderLoadingSelector = (state) => state.orderReducer.isLoading;
-// export const orderNameSelector = (state) => state.orderReducer.name;
-// export const orderNumberSelector = (state) => state.orderReducer.number;
-// export const orderErrorSelector = (state) => state.orderReducer.error;
+import { RootState } from '../../services/types/index';
+
+export const orderLoadingSelector = (state: RootState) => state.orderReducer.isLoading;
+export const orderNameSelector = (state: RootState) => state.orderReducer.name;
+export const orderNumberSelector = (state: RootState) => state.orderReducer.number;
+export const orderErrorSelector = (state: RootState) => state.orderReducer.error;

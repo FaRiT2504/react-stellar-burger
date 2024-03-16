@@ -7,7 +7,7 @@ import {
   DELETE_INGREDIENT,
   MOVE_INGREDIENT
 } from '../constants/constants';
-
+import { IBurgerConstructorIngredient } from "../../services/reducers/burger-constructor-reducer"
 import { TIngredient } from '../types/data';
 // export const PUT_INGREDIENTS: "PUT_INGREDIENTS" = "PUT_INGREDIENTS";
 // export const PUT_BUN: "PUT_BUN" = "PUT_BUN";
@@ -22,7 +22,10 @@ export interface IAddBunAction {
 
 export interface IAddIngredientsAction {
   readonly type: typeof PUT_INGREDIENTS;
-  readonly payload: TIngredient[]
+  readonly payload: {
+    ingredient: TIngredient;
+    key: string;
+  }
 
 }
 
@@ -33,7 +36,7 @@ export interface IDeleteIngredientAction {
 
 export interface IMoveIngredientAction {
   readonly type: typeof MOVE_INGREDIENT;
-  readonly payload: TIngredient[] | null;
+  readonly payload: IBurgerConstructorIngredient[];
 }
 
 export interface IClearConstructorAction {
@@ -54,10 +57,13 @@ export function addBunAction(item: TIngredient): IAddBunAction {
   };
 }
 
-export function addIngredientsAction(item: TIngredient, uuid: string | null): IAddIngredientsAction {
+export function addIngredientsAction(item: TIngredient): IAddIngredientsAction {
   return {
     type: PUT_INGREDIENTS,
-    payload: { ...item, uuid },
+    payload: {
+      ingredient: item,
+      key: uuid(),
+    },
   };
 }
 
@@ -68,7 +74,7 @@ export function deleteIngredientAction(id: string): IDeleteIngredientAction {
   };
 }
 
-export const moveIngredientAction = (dragIndex: number, hoverIndex: number, ingredients: Array<TIngredient>): IMoveIngredientAction => {
+export const moveIngredientAction = (dragIndex: number, hoverIndex: number, ingredients: IBurgerConstructorIngredient[]): IMoveIngredientAction => {
   const dragIngredients = ingredients[dragIndex];
   const sortIngredients = [...ingredients];
   const [hoverItem] = sortIngredients.splice(hoverIndex, 1, dragIngredients);
@@ -79,7 +85,7 @@ export const moveIngredientAction = (dragIndex: number, hoverIndex: number, ingr
   };
 };
 
-export function clearConstructorAction(id: string): IClearConstructorAction {
+export function clearConstructorAction(): IClearConstructorAction {
   return {
     type: CLEAR_CONSTRUCTOR,
   };

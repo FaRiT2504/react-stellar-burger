@@ -20,9 +20,9 @@ export const LoginPage: FC = () => {
     dispatch(login(value.email, value.password));
   };
 
-  if (isChecked === true) {
-    navigate("/");
-  }
+  // if (isChecked === true) {
+  //   navigate("/");
+  // }
   return (
     <>
       <h1 className={`${styles.heading}  text text_type_main-medium mb-6 `}>Вход</h1>

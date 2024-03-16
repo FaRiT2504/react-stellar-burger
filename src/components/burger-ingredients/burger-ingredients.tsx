@@ -76,7 +76,7 @@ const BurgerIngredients: FC = () => {
     if (chosenBun && item.type === "bun") {
       return chosenBun._id === item._id ? 2 : 0
     } else {
-      return chosenIngredients?.filter(ingred => ingred._id === item._id).length
+      return chosenIngredients?.filter(ingred => ingred.ingredient._id === item._id).length
     }
   }, [chosenIngredients, chosenBun]
   )

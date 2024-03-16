@@ -15,9 +15,9 @@ const ProfileList: FC = () => {
   const wsConnected = useSelector(state => state.wsReducer.wsConnected)
   const ingredients = useSelector((state) =>
     state.ingredientsReducer.ingredients);
-  // JSON.parse(localStorage.getItem("teeMeasuresAverages") || '""')
-  // const location = useLocation();
-  const accessToken: any = localStorage.getItem('accessToken')!.split('Bearer ')[1];
+  // const accessToken = localStorage.getItem('accessToken').split('Bearer ')[1]
+  const token = localStorage.getItem('accessToken');
+  const accessToken = token?.split('Bearer ')[1]
   // const accessToken = localStorage.getItem('accessToken');
   const url = 'wss://norma.nomoreparties.space/orders'
 

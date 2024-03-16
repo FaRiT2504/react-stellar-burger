@@ -30,9 +30,9 @@ const FeedPage: FC = () => {
   const wsError = useSelector(state => state.wsReducer.wsError)
 
 
-  return (wsConnected && ordersInfo &&
+  return (wsConnected && ordersInfo ?
 
-    <>
+    (<>
       <h1 className={styles.heading}>
         Лента заказов
       </h1>
@@ -49,7 +49,7 @@ const FeedPage: FC = () => {
         </section>
 
       </div>
-    </>
+    </>) : null
 
 
   )

@@ -10,6 +10,17 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { compose, legacy_createStore as createStore, applyMiddleware } from 'redux';
 import { rootReducer } from './services/reducers/rootReducer';
 import thunk from "redux-thunk";
+// import { render } from "react-dom";
+
+// render() {
+//   return (
+//     <div className="center">
+//       <HomePage />
+//     </div>
+//   );
+// }
+
+
 
 
 ReactDOM.render(

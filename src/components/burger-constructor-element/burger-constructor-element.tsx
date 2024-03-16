@@ -16,9 +16,10 @@ import {
 } from "../../services/actions/burger-constructor-action";
 // import { ingredientType } from "../../utils/types";
 import { TIngredient } from "../../services/types/data";
+import { IBurgerConstructorIngredient } from "../../services/reducers/burger-constructor-reducer"
 
 interface IBurgerConstructorElement {
-  ingredient: TIngredient;
+  ingredient: IBurgerConstructorIngredient;
   index: number;
 }
 // export type TDragItem = {
@@ -29,7 +30,7 @@ const BurgerConstructorElement: FC<IBurgerConstructorElement> = ({ ingredient, i
   const elementRef = useRef<HTMLDivElement>(null);
   const ingredients = useSelector((state) => state.burgerConstructorReducer.ingredients);
 
-  const moveOrderIngredient = (dragIndex: number, hoverIndex: number, ingredients: TIngredient[]) => {
+  const moveOrderIngredient = (dragIndex: number, hoverIndex: number, ingredients: IBurgerConstructorIngredient[]) => {
     dispatch(moveIngredientAction(dragIndex, hoverIndex, ingredients));
   };
 
@@ -82,10 +83,10 @@ const BurgerConstructorElement: FC<IBurgerConstructorElement> = ({ ingredient, i
     >
       <DragIcon type="primary" />
       <ConstructorElement
-        text={ingredient.name}
-        price={ingredient.price}
-        thumbnail={ingredient.image_mobile}
-        handleClose={() => { dispatch(deleteIngredientAction(ingredient._id)) }}
+        text={ingredient.ingredient.name}
+        price={ingredient.ingredient.price}
+        thumbnail={ingredient.ingredient.image_mobile}
+        handleClose={() => { dispatch(deleteIngredientAction(ingredient.ingredient._id)) }}
 
       />
     </div>
