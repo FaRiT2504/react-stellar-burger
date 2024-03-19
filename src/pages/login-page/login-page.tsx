@@ -10,14 +10,14 @@ import { FormEvent, FC } from "react"
 
 export const LoginPage: FC = () => {
   const dispatch = useDispatch();
-  const [value, onChange] = useForm({ email: "", password: "" });
+  const { values, onChange } = useForm({ email: "", password: "" });
   const navigate = useNavigate();
   const isChecked = useSelector(
     (state) => state.userReducer.isAuthChecked
   );
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    dispatch(login(value.email, value.password));
+    dispatch(login(values.email, values.password));
   };
 
   // if (isChecked === true) {
@@ -30,20 +30,20 @@ export const LoginPage: FC = () => {
         <EmailInput
           // type="email"
           name="email"
-          value={value.email}
+          value={values.email}
           onChange={onChange}
         />
         <PasswordInput
           placeholder="string"
           name="password"
-          value={value.password}
+          value={values.password}
           onChange={onChange}
         />
         <Button
           size="medium"
           type="primary"
           htmlType="submit"
-          disabled={!value.email || !value.password}
+          disabled={!values.email || !values.password}
           children="Войти"
         />
       </form>

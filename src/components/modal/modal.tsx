@@ -1,4 +1,4 @@
-import React, { useEffect, ReactNode, FC } from "react";
+import React, { PropsWithChildren, FC, ReactNode } from "react";
 import styles from "./modal.module.css";
 import ReactDOM from "react-dom";
 // import PropTypes from "prop-types";

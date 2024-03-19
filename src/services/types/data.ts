@@ -17,7 +17,15 @@ export type TIngredient = {
   readonly key?: string | null
   readonly action?: TIngredient | null
 }
-
+// export interface IOrder {
+//   _id: string,
+//   status: string,
+//   number: number,
+//   name: string,
+//   createdAt: string,
+//   updatedAt: string,
+//   ingredients: string[]
+// }
 export type TOrder = {
   name?: string | null;
   createdAt: string;
@@ -53,6 +61,7 @@ export type TRegistration = {
   accessToken: string;
 }
 
+
 export type TOwner = {
   name: string;
   email: string;
@@ -86,7 +95,14 @@ export interface INotProtected {
 }
 
 export type TGetUser = Omit<TRegistration, 'accessToken' | 'refreshToken'> & TUser;
-
+export type TResetPassword = {
+  success: boolean;
+  message: string;
+}
+export type TOrderNumber = {
+  success: boolean;
+  orders: TOrder;
+};
 export type TRefreshOption = {
   cache?: string
   method?: string
@@ -116,18 +132,19 @@ export type TOrdersData = {
 
 export type TOrdersInfo = {
   success: boolean,
-  orders: [
-    {
-      ingredients: string[],
-      _id: string | number,
-      status: string,
-      number: number,
-      createdAt: string,
-      updatedAt: string,
-    }
-  ],
+  orders: ReadonlyArray<TOrder>,
   total: number,
   totalToday: number
+}
+
+export type TGetIngredients = {
+  success: boolean;
+  data: TIngredient[];
+};
+
+export type TCheckEmail = {
+  // success: boolean;
+  user: TUser;
 }
 
 

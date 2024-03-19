@@ -8,12 +8,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "../../utils/hooks/useForm";
 import { FormEvent, FC } from "react"
 
+
 export const ForgotPasswordPage: FC = () => {
   const navigate = useNavigate();
-  const [value, onChange] = useForm({ email: "" });
+  const { values, onChange } = useForm({ email: "" });
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    api.checkEmail(value.email)
+    api.checkEmail(values.email)
       .then((res) => {
         if (res.success === true) {
           navigate(`/reset-password`);
@@ -30,14 +31,14 @@ export const ForgotPasswordPage: FC = () => {
       <form className={`${styles.form} mb-20`} onSubmit={onSubmit}>
         <EmailInput
           name="email"
-          value={value.email}
+          value={values.email}
           onChange={onChange}
           placeholder="Укажите e-mail" />
         <Button
           size="medium"
           type="primary"
           htmlType="submit"
-          disabled={!value.email}
+          disabled={!values.email}
           children="Восстановить" />
       </form>
       <div className={styles.container}>

@@ -5,6 +5,8 @@ import {
   SET_NUMBER_ORDER_ERROR
 } from '../constants/constants';
 import { AppThunk } from "../types";
+import { TMakeOrder } from '../types/data';
+import { useDispatch } from "../../utils/hooks/useDispatch";
 // export const SET_NUMBER_ORDER_REQUEST = "SET_NUMBER_ORDER_REQUEST";
 // export const SET_NUMBER_ORDER_SUCCESS = "SET_NUMBER_ORDER_SUCCESS";
 // export const SET_NUMBER_ORDER_ERROR = "SET_NUMBER_ORDER_ERROR";
@@ -35,7 +37,7 @@ export const makeOrder: AppThunk = (ingredients: string) => {
       type: SET_NUMBER_ORDER_REQUEST,
     });
 
-    getResponse("/orders", {
+    getResponse<TMakeOrder>("/orders", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -46,6 +48,7 @@ export const makeOrder: AppThunk = (ingredients: string) => {
       }),
     })
       .then((data) => {
+        const dispatch = useDispatch()
         dispatch({
           type: SET_NUMBER_ORDER_SUCCESS,
           payload: {

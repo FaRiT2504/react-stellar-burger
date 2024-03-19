@@ -5,14 +5,14 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS
 } from "../constants/constants";
-import { TOrdersData } from '../types/data'
+import { TOrdersInfo } from '../types/data'
 import { TWsAction } from "../actions/ws-action";
 
 type TInitialState = {
   wsConnected: boolean,
   wsRequest: boolean,
   wsError: boolean,
-  ordersInfo: TOrdersData | null,
+  ordersInfo: TOrdersInfo | null,
 };
 
 const initialState: TInitialState = {

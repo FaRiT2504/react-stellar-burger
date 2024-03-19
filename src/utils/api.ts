@@ -1,20 +1,18 @@
 import { URL } from "./data"
-import { TGetUser, TMakeOrder, TRefreshOption, TRefresh, TLogOut, TRegistration } from "../services/types/data";
-import { string } from "prop-types";
+import { TMakeOrder, TLogOut, TRefreshOption, TRefresh, TRegistration, TGetIngredients, TGetUser, TResetPassword, TOrderNumber } from "../services/types/data";
 
-let accessToken = localStorage.getItem("accessToken")
-export const checkResponse = (res: any) => {
-  return res.ok ? res.json() : res.json().then((err: string) => Promise.reject(err));
+
+export const checkResponse = <T>(res: Response): Promise<T> => {
+  return res.ok ? res.json() : res.json().then((err: Response) => Promise.reject(err));
 }
 
-
-export const getResponse = (endpoint: string, property: object) => {
+export const getResponse = <T>(endpoint: string, property: object) => {
   return fetch(URL + endpoint, property)
-    .then(checkResponse)
+    .then(checkResponse<T>)
 }
 
 export const getIngredientsRequest = () => {
-  return getResponse(`/ingredients`, {
+  return getResponse<TGetIngredients>(`/ingredients`, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
@@ -26,7 +24,7 @@ export const getIngredientsRequest = () => {
 
 
 export const getOrderFeedRequest = (number: string | number) => {
-  return getResponse(`/orders/${number}`, {
+  return getResponse<TOrderNumber>(`/orders/${number}`, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
@@ -37,7 +35,7 @@ export const getOrderFeedRequest = (number: string | number) => {
 }
 
 export const getOrderProfileRequest = (number: string) => {
-  return getResponse(`/orders/${number}?token=${localStorage.getItem("accessToken")}`, {
+  return getResponse<TOrderNumber>(`/orders/${number}?token=${localStorage.getItem("accessToken")}`, {
     method: 'GET',
     cache: 'no-cache',
     headers: {
@@ -49,7 +47,7 @@ export const getOrderProfileRequest = (number: string) => {
 
 
 const registration = (name: string, email: string, password: string) => {
-  return getResponse(`/auth/register`, {
+  return getResponse<TRegistration>(`/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -64,7 +62,7 @@ const registration = (name: string, email: string, password: string) => {
 
 
 const checkEmail = (email: string) => {
-  return getResponse(`/password-reset`, {
+  return getResponse<TRegistration>(`/password-reset`, {
     method: "POST",
     headers: {
       "Content-type": "application/json;charset=utf-8",
@@ -80,7 +78,7 @@ const checkEmail = (email: string) => {
 }
 
 export const resetPassword = (newPassword: string, token: string) => {
-  return getResponse(`/password-reset/reset`, {
+  return getResponse<TResetPassword>(`/password-reset/reset`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -95,21 +93,8 @@ export const resetPassword = (newPassword: string, token: string) => {
   });
 };
 
-// const login = (email: string, password: string) => {
-//   return getResponse(`/auth/login`, {
-//     method: 'POST',
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       "email": email,
-//       "password": password
-//     })
-//   })
-// }
-
 const login = (email: string, password: string) => {
-  return fetchWithRefresh(`${URL}/auth/login`, {
+  return fetchWithRefresh<TRegistration>(`${URL}/auth/login`, {
     method: 'POST',
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -122,7 +107,7 @@ const login = (email: string, password: string) => {
 }
 
 
-const logout = () => fetchWithRefresh(`${URL}/auth/logout`, {
+const logout = () => fetchWithRefresh<TLogOut>(`${URL}/auth/logout`, {
   method: 'POST',
   headers: {
     "Content-Type": "application/json;charset=utf-8",
@@ -143,7 +128,7 @@ const getUser = () => fetchWithRefresh(`${URL}/auth/user`, {
   }
 });
 
-export const refreshToken = () => fetchWithRefresh(`${URL}/auth/token`, {
+export const refreshToken = () => fetchWithRefresh<TRefresh>(`${URL}/auth/token`, {
   method: "POST",
   headers: {
     "Content-Type": "application/json;charset=utf-8",
@@ -153,8 +138,7 @@ export const refreshToken = () => fetchWithRefresh(`${URL}/auth/token`, {
   }),
 })
 
-
-export const fetchWithRefresh = async (url: string, options: RequestInit & TRefreshOption): Promise<TRegistration | TMakeOrder> => {
+export const fetchWithRefresh = async <T>(url: string, options: RequestInit & TRefreshOption): Promise<TRegistration | TMakeOrder> => {
   try {
     // return getResponse(url, options);
     const res = await fetch(url, options);
@@ -185,7 +169,7 @@ const userRefresh = (name: string, email: string) => fetchWithRefresh(`${URL}/au
     "name": name,
     "email": email,
   })
-});
+}) as Promise<TRegistration>;
 
 
 export const api = {

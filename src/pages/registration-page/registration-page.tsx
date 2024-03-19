@@ -10,7 +10,7 @@ import { useForm } from "../../utils/hooks/useForm";
 import { FormEvent, FC } from "react"
 
 export const RegisterPage: FC = () => {
-  const [value, onChange] = useForm({ name: "", email: "", password: "" });
+  const { values, onChange } = useForm({ name: "", email: "", password: "" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const request = useSelector(
@@ -22,7 +22,7 @@ export const RegisterPage: FC = () => {
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    dispatch(registrationAction(value.name, value.email, value.password));
+    dispatch(registrationAction(values.name, values.email, values.password));
     if (isChecked === true) {
       navigate("/login");
     }
@@ -38,21 +38,21 @@ export const RegisterPage: FC = () => {
           type="text"
           placeholder="Имя"
           name="name"
-          value={value.name}
+          value={values.name}
           onChange={onChange}
           disabled={request}
         />
         <EmailInput
           // type="email"
           name="email"
-          value={value.email}
+          value={values.email}
           onChange={onChange}
           disabled={request}
         />
         <PasswordInput
           // type="text"
           name="password"
-          value={value.password}
+          value={values.password}
           onChange={onChange}
           disabled={request}
         />

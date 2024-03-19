@@ -1,9 +1,10 @@
 // import { getOrderRequest } from "../../utils/api";
 import { getOrderFeedRequest } from "../../utils/api"
 import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED } from '../constants/constants'
+import { useDispatch } from "../../utils/hooks/useDispatch";
 import { AppThunk } from "../types";
-import { TOrdersInfo } from "../types/data";
-
+import { TOrdersInfo, TOrderNumber } from "../types/data";
+// import { TMakeOrder, TLogOut, TRefreshOption, TRefresh, TRegistration, TGetIngredients, TGetUser, TResetPassword, TOrderNumber } from "../services/types/data";
 // export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
 // export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 // export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
@@ -31,7 +32,7 @@ export const getFeedOrder: AppThunk = (number: string | number) => {
     });
     getOrderFeedRequest(number)
       .then(res => {
-
+        const dispatch = useDispatch()
         dispatch({
           type: GET_ORDER_SUCCESS,
           payload: res
@@ -53,7 +54,7 @@ export const getProfileOrder: AppThunk = (number: string | number) => {
     });
     getOrderFeedRequest(number)
       .then(res => {
-
+        const dispatch = useDispatch()
         dispatch({
           type: GET_ORDER_SUCCESS,
           payload: res

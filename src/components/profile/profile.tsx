@@ -14,7 +14,7 @@ const Profile: FC = () => {
     (state) => state.userReducer.user?.email as string
   );
   // const user = useSelector((state) => state.userReducer.user.email );
-  const [values, onChange, setValues] = useForm({ /*name: name, email: email, password: '******' */ });
+  const { values, onChange, setValues } = useForm({ name: name, email: email, password: '******' });
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();

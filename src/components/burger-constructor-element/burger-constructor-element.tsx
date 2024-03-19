@@ -2,19 +2,14 @@ import React, { FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import styles from './burger-constructor-element.module.css'
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components"
-// import { useDispatch, useSelector } from "react-redux";
 import { useSelector } from "../../utils/hooks/useSelector";
 import { useDispatch } from "../../utils/hooks/useDispatch";
 import { DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef } from "react";
-// import {
-//   burgerIngredientsSelector
-// } from "../../services/selectors/ingredients-selector";
-// import PropTypes from 'prop-types';
+
 import {
   deleteIngredientAction, moveIngredientAction
 } from "../../services/actions/burger-constructor-action";
-// import { ingredientType } from "../../utils/types";
 import { TIngredient } from "../../services/types/data";
 import { IBurgerConstructorIngredient } from "../../services/reducers/burger-constructor-reducer"
 
@@ -22,9 +17,6 @@ interface IBurgerConstructorElement {
   ingredient: IBurgerConstructorIngredient;
   index: number;
 }
-// export type TDragItem = {
-//   index: number;
-// };
 const BurgerConstructorElement: FC<IBurgerConstructorElement> = ({ ingredient, index }) => {
   const dispatch = useDispatch();
   const elementRef = useRef<HTMLDivElement>(null);
@@ -92,8 +84,5 @@ const BurgerConstructorElement: FC<IBurgerConstructorElement> = ({ ingredient, i
     </div>
   )
 }
-// BurgerConstructorElement.propTypes = {
-//   index: PropTypes.number,
-//   ingredient: ingredientType,
-// };
+
 export default BurgerConstructorElement;

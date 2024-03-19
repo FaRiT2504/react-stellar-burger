@@ -236,7 +236,7 @@ export const getUserData: AppThunk = () => {
       type: USER_UPDATE_REQUEST,
     });
 
-    getResponse(`/auth/user`, {
+    getResponse<TRegistration>(`/auth/user`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },

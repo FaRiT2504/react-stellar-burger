@@ -6,13 +6,13 @@ import styles from './profile-list.module.css';
 import ProfileCard from "../../components/profile-card/profile-card";
 // import { ingredientsDataSelector } from "../../services/selectors/ingredients-selector";
 import { wsConnectionStart, wsConnectionClosed } from '../../services/actions/ws-action'
-
+import { TOrder } from "../../services/types/data"
 
 
 const ProfileList: FC = () => {
   const dispatch = useDispatch();
   const ordersInfo = useSelector((state) => state.wsReducer.ordersInfo);
-  const wsConnected = useSelector(state => state.wsReducer.wsConnected)
+  // const wsConnected = useSelector(state => state.wsReducer.wsConnected)
   const ingredients = useSelector((state) =>
     state.ingredientsReducer.ingredients);
   // const accessToken = localStorage.getItem('accessToken').split('Bearer ')[1]
@@ -41,11 +41,8 @@ const ProfileList: FC = () => {
       <ul className={styles.list}>
         <li>
           {ordersInfo.orders.map((order) => (
-
             <ProfileCard key={order.number} order={order} ingredients={ingredients} />
-
-          )
-          )
+          ))
           }
         </li>
       </ul>

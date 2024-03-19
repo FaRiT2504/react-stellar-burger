@@ -5,7 +5,7 @@ import {
   WS_CONNECTION_CLOSED,
   WS_GET_ORDERS,
 } from '../constants/constants'
-import { TOrdersData } from '../types/data'
+import { TOrdersInfo } from '../types/data'
 // export const WS_CONNECTION_START = 'WS_CONNECTION_START';
 // export const WS_CONNECTION_SUCCESS = 'WS_CONNECTION_SUCCESS';
 // export const WS_CONNECTION_ERROR = 'WS_CONNECTION_ERROR';
@@ -27,7 +27,7 @@ export interface IWsConnectionClosed {
 }
 export interface IWsGetOrders {
   readonly type: typeof WS_GET_ORDERS
-  readonly payload: TOrdersData | null
+  readonly payload: TOrdersInfo | null
 }
 
 export type TWsAction =
@@ -62,7 +62,7 @@ export const wsConnectionClosed = (): IWsConnectionClosed => {
   };
 };
 
-export const wsGetOrders = (orders: TOrdersData | null): IWsGetOrders => {
+export const wsGetOrders = (orders: TOrdersInfo | null): IWsGetOrders => {
   return {
     type: WS_GET_ORDERS,
     payload: orders

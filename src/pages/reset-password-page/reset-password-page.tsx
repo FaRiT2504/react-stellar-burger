@@ -13,13 +13,13 @@ import { FormEvent, FC } from "react"
 
 export const ResetPasswordPage: FC = () => {
   const navigate = useNavigate();
-  const [value, onChange] = useForm({ password: '', token: '' });
+  const { values, onChange } = useForm({ password: '', token: '' });
   const request = useSelector(
     (state) => state.userReducer.userRegisterRequest
   );
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    api.resetPassword(value.password, value.token)
+    api.resetPassword(values.password, values.token)
       .then((res) => {
         if (res.success === true) {
           navigate("/");
@@ -37,14 +37,14 @@ export const ResetPasswordPage: FC = () => {
       <form className={`${styles.form} mb-20`} onSubmit={onSubmit} >
         <PasswordInput
           name="password"
-          value={value.password}
+          value={values.password}
           onChange={onChange}
           placeholder="Введите новый пароль"
           disabled={request}
         />
         <Input
           name="token"
-          value={value.token}
+          value={values.token}
           onChange={onChange}
           placeholder="Введите код из письма"
           disabled={request}
