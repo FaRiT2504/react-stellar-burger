@@ -35,6 +35,9 @@ const ProfileList: FC = () => {
   if (!ordersInfo) {
     return null
   }
+  if (!ordersInfo.orders) {
+    return <p>ordersInfo.orders=null</p>
+  }
 
   return (ordersInfo &&
     <section className={`${styles.container} custom-scroll`}>
